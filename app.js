@@ -1,26 +1,27 @@
-//Day 2
+//Day 3
+//Aaja dekhi Blogs ko CRUD feature applicable hune project garna suru gareko
 
-//paili internal server banayau
+//paili server banaune
+
 const express = require("express");
 const app = express();
 
-//aba view engine pani setup gareko
+//env initiation
+require("dotenv").config();
+
+//require("./model/index.js");
+
+//ejs template usage
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("home.ejs");
+  res.render("allBlogs.ejs");
 });
 
-app.get("/about", (req, res) => {
-  res.send("About Page");
+app.get("/addblogs", (req, res) => {
+  res.render("addBlogs.ejs");
 });
 
-app.get("/contact", (req, res) => {
-  res.render("contact.ejs");
+app.listen(process.env.PORT, () => {
+  console.log(`Server initiated at port ${process.env.PORT}`);
 });
-
-app.listen(3000, () => {
-  console.log("Server started at port 3000.");
-});
-
-//tyasapchhi node save garne bittikai server reload garna hamile nodemon install garyau
