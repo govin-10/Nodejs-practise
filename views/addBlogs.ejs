@@ -76,20 +76,20 @@
     <div class="formBox">
       <h1>Add Blog</h1>
       <div class="mainForm">
-        <form action="" method="post">
+        <form action="/addblogs" method="post">
           <div class="blog-title">
             <label for="fullName">Blog Title:</label>
             <br />
-            <input type="text" name="" id="fullName" />
+            <input type="text" name="fullName" id="fullName" />
           </div>
           <div class="subTitle">
             <label for="subTitle">SubTitle</label>
             <br />
-            <input type="text" name="" id="subTitle" />
+            <input type="text" name="subTitle" id="subTitle" />
           </div>
           <div class="image">
             <label for="image">Cover Photo:</label>
-            <input type="file" name="" id="image" />
+            <input type="file" name="photo" id="image" />
           </div>
           <div class="content">
             <!-- <input
@@ -98,7 +98,7 @@
               id=""
               placeholder="Your Blog content here...."
             /> -->
-            <textarea name="" id="" cols="30" rows="10">
+            <textarea name="description" id="" cols="30" rows="10">
 Enter your text:</textarea
             >
             <button type="submit">Post</button>
