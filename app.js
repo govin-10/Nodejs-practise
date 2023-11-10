@@ -9,7 +9,7 @@ const app = express();
 //env initiation
 require("dotenv").config();
 
-//require("./model/index.js");
+require("./model/index.js");
 
 //ejs template usage
 app.set("view engine", "ejs");
