@@ -20,20 +20,34 @@ app.use(express.urlencoded({ urlencoded: true }));
 //ejs template usage
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  res.render("allBlogs.ejs");
+//multer import
+const { multer, storage } = require("./middleware/multerConfig.js");
+const upload = multer({ storage: storage });
+
+//accessing the uploaded files
+app.use(express.static("data"));
+
+app.get("/", async (req, res) => {
+  const allBlogs = await blogs.findAll();
+  console.log(allBlogs);
+  res.render("allBlogs.ejs", { allBlogs: allBlogs });
 });
 
 app.get("/addblogs", (req, res) => {
   res.render("addBlogs.ejs");
 });
 
-app.post("/addblogs", (req, res) => {
-  blogs.create({
-    title: req.body.fullName,
-    subTitle: req.body.subTitle,
-    imageUrl: req.body.photo,
-    description: req.body.description,
+app.post("/addblogs", upload.single("photo"), async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
+
+  const { fullName, subTitle, photo, description } = req.body;
+  const { filename } = req.file;
+  await blogs.create({
+    title: fullName,
+    subTitle,
+    imageUrl: filename,
+    description,
   });
   res.send("<script>alert('Blogs created successfully.')</script>");
 });

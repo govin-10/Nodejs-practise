@@ -66,9 +66,9 @@
     <div class="width-full">
       <nav>
         <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Blogs</a></li>
-          <li><a href="">Add Blog</a></li>
+          <li><a href="/">Home</a></li>
+
+          <li><a href="/addblogs">Add Blog</a></li>
         </ul>
       </nav>
     </div>
@@ -76,7 +76,7 @@
     <div class="formBox">
       <h1>Add Blog</h1>
       <div class="mainForm">
-        <form action="/addblogs" method="post">
+        <form action="/addblogs" method="post" enctype="multipart/form-data">
           <div class="blog-title">
             <label for="fullName">Blog Title:</label>
             <br />
