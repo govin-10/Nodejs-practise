@@ -27,7 +27,7 @@
       margin-right: 2rem;
       font-size: 1.2rem;
     }
-    a {
+    ul li a {
       text-decoration: none;
       color: white;
     }
@@ -58,6 +58,7 @@
         <div class="info">
           <h1><%- blog.title%></h1>
           <h3><%- blog.subTitle%></h3>
+          <a href="/edit/<%-blog.id%>">Edit</a>
         </div>
         <div class="imgBox">
           <img

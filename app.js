@@ -29,7 +29,7 @@ app.use(express.static("data"));
 
 app.get("/", async (req, res) => {
   const allBlogs = await blogs.findAll();
-  console.log(allBlogs);
+
   res.render("allBlogs.ejs", { allBlogs: allBlogs });
 });
 
@@ -38,10 +38,7 @@ app.get("/addblogs", (req, res) => {
 });
 
 app.post("/addblogs", upload.single("photo"), async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
-
-  const { fullName, subTitle, photo, description } = req.body;
+  const { fullName, subTitle, description } = req.body;
   const { filename } = req.file;
   await blogs.create({
     title: fullName,
@@ -50,6 +47,50 @@ app.post("/addblogs", upload.single("photo"), async (req, res) => {
     description,
   });
   res.send("<script>alert('Blogs created successfully.')</script>");
+});
+
+app.get("/edit/:id", async (req, res) => {
+  const blog = await blogs.findAll({
+    where: {
+      id: req.params.id,
+    },
+  });
+
+  res.render("editBlog.ejs", {
+    blog: blog[0],
+    BASE_URL: process.env.base_url,
+    PORT: process.env.PORT,
+  });
+});
+
+app.post("/editblog/:id", upload.single("newImage"), async (req, res) => {
+  const { title, subTitle, description } = req.body;
+
+  // Check if a new image was uploaded
+  const blog = await blogs.findAll({
+    where: {
+      id: req.params.id,
+    },
+  });
+
+  if (req.file.filename) {
+    require("fs").unlink(`./data/${blog[0].imageUrl}`, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("file updated success.");
+      }
+    });
+  }
+
+  await blog[0].update({
+    title,
+    subTitle,
+    imageUrl: req.file ? req.file.filename : blog[0].imageUrl,
+    description,
+  });
+
+  res.redirect("/");
 });
 
 app.listen(process.env.PORT, () => {

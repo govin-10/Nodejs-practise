@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Blog</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .width-full {
+        background-color: black;
+      }
+      nav {
+        padding: 2rem;
+        max-width: 1000px;
+        margin: auto;
+      }
+      ul {
+        display: flex;
+      }
+      ul li {
+        list-style: none;
+        margin-right: 2rem;
+        font-size: 1.2rem;
+      }
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      .formBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 2rem auto;
+        max-width: 1000px;
+      }
+      .mainForm {
+        width: 100%;
+        margin-top: 1rem;
+        padding: 1rem;
+      }
+      form > div {
+        margin-bottom: 1rem;
+      }
+      input {
+        width: 100%;
+        height: 2rem;
+      }
+      .content textarea {
+        width: 100%;
+        max-width: 100%;
+        min-height: 10rem;
+        padding: 1rem;
+      }
+      button {
+        padding: 0.3rem 1.2rem;
+        cursor: pointer;
+      }
+      img {
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="width-full">
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+
+          <li><a href="/addblogs">Add Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="formBox">
+      <h1>Edit Blog</h1>
+      <div class="mainForm">
+        <form
+          action="/editblog/<%-blog.id%>"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="blog-title">
+            <label for="fullName">Blog Title:</label>
+            <br />
+            <input
+              value="<%- blog.title %>"
+              type="text"
+              name="fullName"
+              id="fullName"
+            />
+          </div>
+          <div class="subTitle">
+            <label for="subTitle">SubTitle</label>
+            <br />
+            <input
+              type="text"
+              name="subTitle"
+              id="subTitle"
+              value="<%-blog.subTitle%>"
+            />
+          </div>
+          <% console.log(blog.imageUrl)%>
+          <div class="image">
+            <label for="image">Cover Photo:</label>
+            <br />
+            <p><%- blog.imageUrl %></p>
+            <img src="<%- BASE_URL%>:<%-PORT%>/<%-blog.imageUrl%>" />
+          </div>
+
+          <div class="newImage">
+            <label for="newIimage">New Cover Photo:</label>
+            <input type="file" name="newImage" />
+          </div>
+          <div class="content">
+            <!-- <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Your Blog content here...."
+            /> -->
+            <textarea name="description" id="" cols="30" rows="10">
+                <%-blog.description%>
+            </textarea>
+            <button type="submit">Post</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
