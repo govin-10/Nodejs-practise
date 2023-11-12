@@ -31,16 +31,43 @@
       text-decoration: none;
       color: white;
     }
+    .blog {
+      width: 100%;
+      display: flex;
+      max-width: 1000px;
+      justify-content: space-between;
+      padding: 1rem;
+      margin: 1rem auto;
+      border-bottom: 2px solid gray;
+      box-shadow: 3px 3px gray;
+    }
   </style>
   <body>
     <div class="width-full">
       <nav>
         <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Blogs</a></li>
-          <li><a href="">Add Blog</a></li>
+          <li><a href="/">Home</a></li>
+
+          <li><a href="addblogs">Add Blog</a></li>
         </ul>
       </nav>
     </div>
+    <section class="allblogs">
+      <% allBlogs.forEach((blog)=>{ %>
+      <div class="blog">
+        <div class="info">
+          <h1><%- blog.title%></h1>
+          <h3><%- blog.subTitle%></h3>
+        </div>
+        <div class="imgBox">
+          <img
+            src="<%-blog.imageUrl%>"
+            alt=""
+            style="width: 150px; height: 150px"
+          />
+        </div>
+      </div>
+      <% }) %>
+    </section>
   </body>
 </html>
