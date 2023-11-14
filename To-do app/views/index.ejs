@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      .done {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to To-do App</h1>
+
+    <div>
+      <form action="addItem" method="post">
+        <input
+          type="text"
+          name="activity"
+          placeholder="Enter your activity here..."
+        />
+        <button type="submit">
+          <i class="fa-solid fa-circle-down"></i>
+        </button>
+      </form>
+    </div>
+
+    <div>
+      <ul>
+        <% activities.forEach((item, index)=>{ %>
+        <li>
+          <span id="item<%- index %>"><%- item.activity %></span>
+          <div class="buttons">
+            <span class="complete-button" data-index="<%- index %>">
+              <i class="fa-solid fa-circle-check"></i>
+            </span>
+            <span>
+              <a href="/delete/<%-item.id%>"
+                ><i class="fa-solid fa-trash"></i
+              ></a>
+            </span>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <script>
+      const complete_buttons = document.querySelectorAll(".complete-button");
+      // const item = document.querySelectorAll(".item");
+      complete_buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const index = button.dataset.index;
+          const item = document.getElementById(`item${index}`);
+          item.classList.toggle("done");
+        });
+      });
+    </script>
+  </body>
+</html>
